@@ -3,7 +3,10 @@ package com.azlir.restaurant.entities.databases;
 import com.azlir.restaurant.entities.enums.DiscountType;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
@@ -21,9 +24,8 @@ public class Coupon {
   @Column(name = "id", nullable = false)
   private UUID id;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "inserted_by", nullable = false)
-  private StoreAdmin insertedBy;
+  @Column(name = "inserted_by", nullable = false)
+  private UUID insertedBy;
 
   @Column(name = "coupon_code", nullable = false, length = 16)
   private String couponCode;

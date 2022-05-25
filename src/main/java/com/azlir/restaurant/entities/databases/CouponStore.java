@@ -3,6 +3,7 @@ package com.azlir.restaurant.entities.databases;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -12,16 +13,13 @@ import javax.persistence.*;
 @ToString(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "coupon_stores")
+@IdClass(CouponStoreId.class)
 public class CouponStore {
-  @EmbeddedId private CouponStoreId id;
+  @Id
+  @Column(name = "coupon_id", nullable = false)
+  private UUID couponId;
 
-  @MapsId("couponId")
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "coupon_id", nullable = false)
-  private Coupon coupon;
-
-  @MapsId("storeId")
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "store_id", nullable = false)
-  private Store store;
+  @Id
+  @Column(name = "store_id", nullable = false)
+  private UUID storeId;
 }

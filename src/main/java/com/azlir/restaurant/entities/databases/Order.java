@@ -5,7 +5,10 @@ import com.azlir.restaurant.entities.enums.OrderType;
 import com.azlir.restaurant.entities.enums.PickupType;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
@@ -23,34 +26,29 @@ public class Order {
   @Column(name = "id", nullable = false)
   private UUID id;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "customer_id", nullable = false)
-  private Customer customer;
+  @Column(name = "customer_id", nullable = false)
+  private UUID customerId;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "store_id", nullable = false)
-  private Store store;
+  @Column(name = "store_id", nullable = false)
+  private UUID storeId;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "store_account_id")
-  private StoreAccount storeAccount;
+  @Column(name = "store_account_id")
+  private UUID storeAccountId;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "table_id")
-  private ReservationTable table;
+  @Column(name = "table_id")
+  private UUID tableId;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "coupon_id")
-  private Coupon coupon;
+  @Column(name = "coupon_id")
+  private UUID couponId;
 
   @Column(name = "buyer", nullable = false, length = 64)
   private String buyer;
 
-  @Lob
+
   @Column(name = "store_image")
   private String storeImage;
 
-  @Lob
+
   @Column(name = "store_banner")
   private String storeBanner;
 

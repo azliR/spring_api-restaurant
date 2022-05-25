@@ -2,7 +2,10 @@ package com.azlir.restaurant.entities.databases;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -19,13 +22,11 @@ public class OrderDetail {
   @Column(name = "id", nullable = false)
   private UUID id;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "order_id", nullable = false)
-  private Order order;
+  @Column(name = "order_id", nullable = false)
+  private UUID orderId;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "item_id", nullable = false)
-  private Item item;
+  @Column(name = "item_id", nullable = false)
+  private UUID itemId;
 
   @Column(name = "item_name", nullable = false, length = 64)
   private String itemName;
@@ -39,7 +40,6 @@ public class OrderDetail {
   @Column(name = "total", nullable = false, precision = 11, scale = 2)
   private BigDecimal total;
 
-  @Lob
   @Column(name = "picture")
   private String picture;
 

@@ -21,11 +21,10 @@ public class StoreStaff {
   @MapsId
   @OneToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "store_account_id", nullable = false)
-  private StoreAccount storeAccounts;
+  private StoreAccount storeAdminId;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "store_id", nullable = false)
-  private Store store;
+  @Column(name = "store_id", nullable = false)
+  private UUID store;
 
   @Column(name = "username", nullable = false, length = 36)
   private String username;

@@ -3,6 +3,8 @@ package com.azlir.restaurant.entities.databases;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -12,16 +14,13 @@ import javax.persistence.*;
 @ToString(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "coupon_customers")
-public class CouponCustomer {
-  @EmbeddedId private CouponCustomerId id;
+@IdClass(CouponCustomerId.class)
+public class CouponCustomer implements Serializable {
+  @Id
+  @Column(name = "coupon_id", nullable = false)
+  private UUID couponId;
 
-  @MapsId("couponId")
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "coupon_id", nullable = false)
-  private Coupon coupon;
-
-  @MapsId("customerId")
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "customer_id", nullable = false)
-  private Customer customer;
+  @Id
+  @Column(name = "customer_id", nullable = false)
+  private UUID customerId;
 }

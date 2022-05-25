@@ -2,7 +2,10 @@ package com.azlir.restaurant.entities.databases;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -19,9 +22,8 @@ public class ItemAddon {
   @Column(name = "id", nullable = false)
   private UUID id;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "addon_category_id", nullable = false)
-  private ItemAddonCategory addonCategory;
+  @Column(name = "addon_category_id", nullable = false)
+  private UUID addonCategoryId;
 
   @Column(name = "name", nullable = false, length = 64)
   private String name;

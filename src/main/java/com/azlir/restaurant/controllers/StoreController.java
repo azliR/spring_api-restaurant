@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -21,13 +19,8 @@ public class StoreController {
     this.storeService = storeService;
   }
 
-  @GetMapping
-  public List<Store> getAllStores() {
-    return storeService.getAllStores();
-  }
-
   @GetMapping(value = "/{id}")
-  public Store getStoreById(@PathVariable("id") @Min(1) UUID id) {
+  public Store getStoreById(@PathVariable("id") UUID id) {
     return storeService
         .findById(id)
         .orElseThrow(() -> new NotFoundException("Store dengan id " + id + " tidak ditemukan!"));
@@ -39,8 +32,7 @@ public class StoreController {
   }
 
   @PutMapping(value = "/{id}")
-  public Store updateStore(
-      @PathVariable("id") @Min(1) UUID id, @Valid @RequestBody Store newStore) {
+  public Store updateStore(@PathVariable("id") UUID id, @Valid @RequestBody Store newStore) {
     // TODO: Update store
     Store store =
         storeService
@@ -51,7 +43,7 @@ public class StoreController {
   }
 
   @DeleteMapping(value = "/{id}")
-  public String deleteStore(@PathVariable("id") @Min(1) UUID id) {
+  public String deleteStore(@PathVariable("id") UUID id) {
     Store store =
         storeService
             .findById(id)

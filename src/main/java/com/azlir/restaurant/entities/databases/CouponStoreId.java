@@ -1,28 +1,17 @@
 package com.azlir.restaurant.entities.databases;
 
-import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString(onlyExplicitlyIncluded = true)
-@Embeddable
 public class CouponStoreId implements Serializable {
-  private static final long serialVersionUID = -6958975203353062979L;
+  @Serial private static final long serialVersionUID = -5958370723231658982L;
 
-  @Column(name = "coupon_id", nullable = false)
   private UUID couponId;
 
-  @Column(name = "store_id", nullable = false)
   private UUID storeId;
 
   @Override

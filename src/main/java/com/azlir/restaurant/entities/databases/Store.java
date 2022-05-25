@@ -2,7 +2,10 @@ package com.azlir.restaurant.entities.databases;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -19,9 +22,8 @@ public class Store {
   @Column(name = "id", nullable = false)
   private UUID id;
 
-  @OneToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "store_admin_id", nullable = false)
-  private StoreAdmin storeAdmin;
+  @Column(name = "store_admin_id", nullable = false)
+  private UUID storeAdminId;
 
   @Column(name = "name", nullable = false, length = 64)
   private String name;
@@ -41,9 +43,8 @@ public class Store {
   @Column(name = "street_address", nullable = false)
   private String streetAddress;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "postcode_id", nullable = false)
-  private Postcode postcode;
+  @Column(name = "postcode_id", nullable = false)
+  private String postcode;
 
   @Column(name = "latitude", nullable = false)
   private Double latitude;

@@ -21,6 +21,9 @@ public class ItemSubCategory {
   @Column(name = "id", nullable = false)
   private UUID id;
 
+  @Column(name = "store_id", nullable = false)
+  private UUID storeId;
+
   @Column(name = "name", nullable = false, length = 64)
   private String name;
 }

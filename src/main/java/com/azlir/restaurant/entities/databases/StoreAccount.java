@@ -24,7 +24,7 @@ public class StoreAccount {
   private UUID id;
 
   @Column(name = "full_name", nullable = false, length = 64)
-  private String fullName;
+  private String storeId;
 
   @Column(name = "role", columnDefinition = "store_role_enum not null")
   private StoreRole role;

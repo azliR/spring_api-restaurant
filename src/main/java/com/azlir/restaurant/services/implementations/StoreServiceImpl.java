@@ -20,8 +20,8 @@ public class StoreServiceImpl implements StoreService {
   }
 
   @Override
-  public List<Store> getAllStores() {
-    return storeRepository.findAll();
+  public List<Store> getNearbyStores(double latitude, double longitude, int page, int pageLimit) {
+    return storeRepository.getNearbyStores(latitude, longitude, page, pageLimit);
   }
 
   @Override

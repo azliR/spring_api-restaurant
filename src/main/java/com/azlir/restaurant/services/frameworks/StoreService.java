@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface StoreService {
-  List<Store> getAllStores();
+  List<Store> getNearbyStores(double latitude, double longitude, int page, int pageLimit);
 
   Optional<Store> findById(UUID id);
 

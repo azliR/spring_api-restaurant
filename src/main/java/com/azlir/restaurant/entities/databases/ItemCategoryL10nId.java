@@ -1,28 +1,17 @@
 package com.azlir.restaurant.entities.databases;
 
-import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString(onlyExplicitlyIncluded = true)
-@Embeddable
 public class ItemCategoryL10nId implements Serializable {
-  private static final long serialVersionUID = -5662655443034353595L;
+  @Serial private static final long serialVersionUID = 7975086358000141075L;
 
-  @Column(name = "category_id", nullable = false)
   private UUID categoryId;
 
-  @Column(name = "language_code", nullable = false, length = 2)
   private String languageCode;
 
   @Override

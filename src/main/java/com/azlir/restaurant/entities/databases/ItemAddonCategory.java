@@ -2,7 +2,10 @@ package com.azlir.restaurant.entities.databases;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
 
 @Builder
@@ -18,9 +21,8 @@ public class ItemAddonCategory {
   @Column(name = "id", nullable = false)
   private UUID id;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "item_id", nullable = false)
-  private Item item;
+  @Column(name = "item_id", nullable = false)
+  private UUID itemId;
 
   @Column(name = "name", nullable = false, length = 64)
   private String name;

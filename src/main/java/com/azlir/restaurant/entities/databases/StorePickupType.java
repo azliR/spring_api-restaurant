@@ -1,8 +1,10 @@
 package com.azlir.restaurant.entities.databases;
 
+import com.azlir.restaurant.entities.enums.PickupType;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -12,11 +14,13 @@ import javax.persistence.*;
 @ToString(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "store_pickup_types")
+@IdClass(StorePickupTypeId.class)
 public class StorePickupType {
-  @EmbeddedId private StorePickupTypeId id;
+  @Id
+  @Column(name = "store_id", nullable = false)
+  private UUID storeId;
 
-  @MapsId("storeId")
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "store_id", nullable = false)
-  private Store store;
+  @Id
+  @Column(name = "pickup_type", columnDefinition = "pickup_type_enum not null")
+  private PickupType pickupType;
 }
