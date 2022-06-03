@@ -1,8 +1,8 @@
 package com.azlir.restaurant.controllers;
 
-import com.azlir.restaurant.entities.databases.ItemCategory;
+import com.azlir.restaurant.entities.databases.ItemSubCategory;
 import com.azlir.restaurant.exceptions.NotFoundException;
-import com.azlir.restaurant.services.frameworks.ItemCategoryService;
+import com.azlir.restaurant.services.frameworks.ItemSubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,46 +11,52 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/item/category")
-public class ItemCategoryController {
-  private final ItemCategoryService itemCategoryService;
+@RequestMapping("/api/v1/item/sub_category")
+public class ItemSubCategoryController {
+  private final ItemSubCategoryService itemSubCategoryService;
 
   @Autowired
-  public ItemCategoryController(ItemCategoryService itemCategoryService) {
-    this.itemCategoryService = itemCategoryService;
+  public ItemSubCategoryController(ItemSubCategoryService itemSubCategoryService) {
+    this.itemSubCategoryService = itemSubCategoryService;
   }
 
   @GetMapping
-  public List<ItemCategory> getItemCategoriesHaveItem(
-      @RequestParam("page") int page, @RequestParam("page_limit") int pageLimit) {
-    return itemCategoryService.getItemCategoriesHaveItem(page, pageLimit);
+  public List<ItemSubCategory> getItemSubCategoriesHaveItem(
+      @RequestParam("store_id") UUID storeId,
+      @RequestParam(value = "language_code", required = false) String languageCode,
+      @RequestParam("page") int page,
+      @RequestParam("page_limit") int pageLimit) {
+    return itemSubCategoryService.getItemSubCategoriesHaveItem(
+        storeId, languageCode, page, pageLimit);
   }
 
   @PostMapping
-  public ItemCategory addItemCategory(@Valid @RequestBody ItemCategory itemCategory) {
-    return itemCategoryService.save(itemCategory);
+  public ItemSubCategory addItemSubCategory(@Valid @RequestBody ItemSubCategory itemSubCategory) {
+    return itemSubCategoryService.save(itemSubCategory);
   }
 
   @PutMapping(value = "/{id}")
-  public ItemCategory updateItemCategory(
-      @PathVariable("id") UUID id, @Valid @RequestBody ItemCategory newItemCategory) {
-    // TODO: Update itemCategory
-    ItemCategory itemCategory =
-        itemCategoryService
+  public ItemSubCategory updateItemSubCategory(
+      @PathVariable("id") UUID id, @Valid @RequestBody ItemSubCategory newItemSubCategory) {
+    // TODO: Update itemSubCategory
+    ItemSubCategory itemSubCategory =
+        itemSubCategoryService
             .findById(id)
             .orElseThrow(
-                () -> new NotFoundException("ItemCategory dengan id " + id + " tidak ditemukan!"));
-    return itemCategoryService.save(itemCategory);
+                () ->
+                    new NotFoundException("ItemSubCategory dengan id " + id + " tidak ditemukan!"));
+    return itemSubCategoryService.save(itemSubCategory);
   }
 
   @DeleteMapping(value = "/{id}")
-  public String deleteItemCategory(@PathVariable("id") UUID id) {
-    ItemCategory itemCategory =
-        itemCategoryService
+  public String deleteItemSubCategory(@PathVariable("id") UUID id) {
+    ItemSubCategory itemSubCategory =
+        itemSubCategoryService
             .findById(id)
             .orElseThrow(
-                () -> new NotFoundException("ItemCategory dengan id " + id + " tidak ditemukan!"));
-    itemCategoryService.deleteById(itemCategory.getId());
-    return "ItemCategory dengan ID :" + id + " berhasil dihapus";
+                () ->
+                    new NotFoundException("ItemSubCategory dengan id " + id + " tidak ditemukan!"));
+    itemSubCategoryService.deleteById(itemSubCategory.getSubCategoryId());
+    return "ItemSubCategory dengan ID :" + id + " berhasil dihapus";
   }
 }

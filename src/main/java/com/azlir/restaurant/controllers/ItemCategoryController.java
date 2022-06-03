@@ -1,6 +1,7 @@
 package com.azlir.restaurant.controllers;
 
 import com.azlir.restaurant.entities.databases.ItemCategory;
+import com.azlir.restaurant.entities.databases.ItemCategoryL10n;
 import com.azlir.restaurant.exceptions.NotFoundException;
 import com.azlir.restaurant.services.frameworks.ItemCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +22,11 @@ public class ItemCategoryController {
   }
 
   @GetMapping
-  public List<ItemCategory> getAllItemCategories(
-      @RequestParam("page") int page, @RequestParam("page_limit") int pageLimit) {
-    return itemCategoryService.getAllItemCategories(page, pageLimit);
-  }
-
-  @GetMapping(value = "/{id}")
-  public ItemCategory getItemCategoryById(@PathVariable("id") UUID id) {
-    return itemCategoryService
-        .findById(id)
-        .orElseThrow(
-            () -> new NotFoundException("ItemCategory dengan id " + id + " tidak ditemukan!"));
+  public List<ItemCategoryL10n> getItemCategoriesHaveItem(
+      @RequestParam(value = "language_code", required = false) String languageCode,
+      @RequestParam("page") int page,
+      @RequestParam("page_limit") int pageLimit) {
+    return itemCategoryService.getItemCategoriesHaveItem(languageCode, page, pageLimit);
   }
 
   @PostMapping

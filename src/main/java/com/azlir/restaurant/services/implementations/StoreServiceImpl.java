@@ -1,6 +1,8 @@
 package com.azlir.restaurant.services.implementations;
 
+import com.azlir.restaurant.entities.databases.NearbyStore;
 import com.azlir.restaurant.entities.databases.Store;
+import com.azlir.restaurant.repositories.NearbyStoreRepository;
 import com.azlir.restaurant.repositories.StoreRepository;
 import com.azlir.restaurant.services.frameworks.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +15,20 @@ import java.util.UUID;
 @Service
 public class StoreServiceImpl implements StoreService {
   private final StoreRepository storeRepository;
+  private final NearbyStoreRepository nearbyStoreRepository;
 
   @Autowired
-  public StoreServiceImpl(StoreRepository storeRepository) {
+  public StoreServiceImpl(
+      StoreRepository storeRepository, NearbyStoreRepository nearbyStoreRepository) {
     this.storeRepository = storeRepository;
+    this.nearbyStoreRepository = nearbyStoreRepository;
   }
 
   @Override
-  public List<Store> getNearbyStores(double latitude, double longitude, int page, int pageLimit) {
-    return storeRepository.getNearbyStores(latitude, longitude, page, pageLimit);
+  public List<NearbyStore> getNearbyStores(
+      double latitude, double longitude, int page, int pageLimit) {
+    final var pageOffset = (page - 1) * pageLimit;
+    return nearbyStoreRepository.getNearbyStores(latitude, longitude, pageLimit, pageOffset);
   }
 
   @Override

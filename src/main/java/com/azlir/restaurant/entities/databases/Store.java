@@ -43,7 +43,7 @@ public class Store {
   @Column(name = "street_address", nullable = false)
   private String streetAddress;
 
-  @Column(name = "postcode_id", nullable = false)
+  @Column(name = "postcode", nullable = false)
   private String postcode;
 
   @Column(name = "latitude", nullable = false)
@@ -57,4 +57,10 @@ public class Store {
 
   @Column(name = "is_active", nullable = false)
   private Boolean isActive = false;
+
+  private String city;
+
+  private String state;
+
+  private String country;
 }

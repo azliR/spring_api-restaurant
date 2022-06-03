@@ -2,7 +2,9 @@ package com.azlir.restaurant.entities.databases;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.UUID;
 
 @Builder
@@ -12,14 +14,11 @@ import java.util.UUID;
 @Setter
 @ToString(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "item_sub_category_l10ns")
-@IdClass(ItemSubCategoryL10nId.class)
-public class ItemSubCategoryL10n {
+public class ItemSubCategory {
   @Id
   @Column(name = "sub_category_id", nullable = false)
   private UUID subCategoryId;
 
-  @Id
   @Column(name = "language_code", nullable = false, length = 2)
   private String languageCode;
 

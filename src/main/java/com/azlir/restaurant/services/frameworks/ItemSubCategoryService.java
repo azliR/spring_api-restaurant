@@ -1,17 +1,18 @@
 package com.azlir.restaurant.services.frameworks;
 
-import com.azlir.restaurant.entities.databases.ItemCategory;
+import com.azlir.restaurant.entities.databases.ItemSubCategory;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface ItemCategoryService {
-  List<ItemCategory> getItemCategoriesHaveItem(int page, int pageLimit);
+public interface ItemSubCategoryService {
+  List<ItemSubCategory> getItemSubCategoriesHaveItem(
+      UUID storeId, String languageCode, int page, int pageLimit);
 
-  Optional<ItemCategory> findById(UUID id);
+  Optional<ItemSubCategory> findById(UUID id);
 
-  ItemCategory save(ItemCategory itemCategory);
+  ItemSubCategory save(ItemSubCategory itemCategory);
 
   void deleteById(UUID id);
 }

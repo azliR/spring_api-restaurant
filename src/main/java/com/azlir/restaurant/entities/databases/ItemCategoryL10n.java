@@ -16,7 +16,7 @@ import java.util.UUID;
 @IdClass(ItemCategoryL10nId.class)
 public class ItemCategoryL10n {
   @Id
-  @Column(name = "category_id", nullable = false)
+  @Column(name = "id", nullable = false)
   private UUID categoryId;
 
   @Id
@@ -25,4 +25,6 @@ public class ItemCategoryL10n {
 
   @Column(name = "name", nullable = false, length = 64)
   private String name;
+
+  private String translatedName;
 }
